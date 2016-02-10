@@ -15,7 +15,10 @@ dockerBuild {
     # Optional: add or overwrite files in the context dir
     files:
       foo: 'some file content',
-      Dockerfile: 'FROM alpine:latest\nCOPY foo /bar'
+      Dockerfile: '''
+        FROM alpine:latest
+        COPY foo /bar
+      '''
 
 
   # Optional: Connection options passed directly to the constructor of dockerode
