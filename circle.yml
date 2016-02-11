@@ -5,4 +5,4 @@ machine:
 
 test:
   pre:
-    - cp features/config/docker.linux.example.ls features/config/docker.ls
+    - cp config/docker.linux.example.ls config/docker.ls
