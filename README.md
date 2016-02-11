@@ -7,27 +7,10 @@ Node api to build docker images programmatically
 dockerBuild = require('docker-build');
 
 
-dockerBuild {
-  context:
-    # Optional: base directory to use for the context
-    dir: '/path/to/context/dir'
-    
-    # Optional: add or overwrite files in the context dir
-    files:
-      foo: 'some file content',
-      Dockerfile: '''
-        FROM alpine:latest
-        COPY foo /bar
-      '''
+image = new DockerBuild from: 'ubuntu:latest'
+image.copy path.join(__dirname, 'file.txt'), '/root/file.txt'
+image.run 'touch other_file'
+image.expose 3000
 
-
-  # Optional: Connection options passed directly to the constructor of dockerode
-  # See https://github.com/apocas/dockerode
-  dockerodeArgs: {socketPath: '/var/run/docker.sock'},
-  
-  # Optional: tag to use for built docker container
-  tag: 'my_image_tag'
-  
-}, (err) ->
-  # Called when build is finished with any errors
+image.build tag: 'my_image_tag', (err) ->
 ```
