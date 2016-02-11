@@ -2,6 +2,9 @@ machine:
   services:
     - docker
 
+  node:
+    version: 5.2.0
+
 
 test:
   pre:
