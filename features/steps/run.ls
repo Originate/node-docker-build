@@ -1,5 +1,5 @@
 require! {
-  '../../docker_build': DockerBuild
+  '../../src/docker_build': DockerBuild
   '../config/docker': docker-config
   'livescript'
   'scope-eval'
