@@ -7,11 +7,10 @@ Node api to build docker images programmatically
 dockerBuild = require('docker-build');
 
 
-image = new DockerBuild from: 'node:latest'
-image.copy srcDir, '/home/app'
-image.run 'npm install'
+image = new DockerBuild from: 'ubuntu:latest'
+image.copy path.join(__dirname, 'file.txt'), '/root/file.txt'
+image.run 'touch other_file'
 image.expose 3000
-image.cmd 'npm start'
 
 image.build tag: 'my_image_tag', (err) ->
 ```
