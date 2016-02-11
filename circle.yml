@@ -6,3 +6,7 @@ machine:
 test:
   pre:
     - cp config/docker.linux.example.ls config/docker.ls
+
+  override:
+    - npm run lint-dependencies
+    - npm test

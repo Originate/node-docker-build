@@ -1,5 +1,4 @@
 require! {
-  'async'
   'chai': {expect}
   'nitroglycerin': N
 }
