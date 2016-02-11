@@ -9,7 +9,7 @@ require! {
 module.exports = ->
 
   @Given /^a new DockerBuild instance called "([^"]+)"$/ (@instance-name) ->
-    @run-scope[@instance-name] = new DockerBuild from: 'alpine:latest'
+    @run-scope[@instance-name] = new DockerBuild {from: 'alpine:latest', docker-config}
 
 
   @When /^running:$/ timeout: 50000, (source) ->

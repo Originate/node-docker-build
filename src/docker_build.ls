@@ -8,8 +8,8 @@ require! {
 
 class DockerBuild
 
-  (opts) ->
-    @docker-file-commands = ["FROM #{opts.from}"]
+  ({from, @docker-config}) ->
+    @docker-file-commands = ["FROM #{from}"]
     @tarball = tarStream.pack!
 
 
@@ -18,7 +18,7 @@ class DockerBuild
       ..entry name: 'Dockerfile', @docker-file-commands.join('\n')
       ..finalize!
 
-    new Dockerode!.buildImage @tarball, t: tag, (err, response) ->
+    new Dockerode(@docker-config).buildImage @tarball, t: tag, (err, response) ->
       return done err if err
       response
         ..on 'data' ->
