@@ -1,4 +1,4 @@
-# Copy this file to features/config/docker.ls before developing on OSX
+# Copy this file to config/docker.ls before developing on OSX
 # The DOCKER_CERT_PATH and DOCKER_HOST need to be updated for your configuration
 # These values can be found by running `docker-machine env [MACHINE_NAME]`
 

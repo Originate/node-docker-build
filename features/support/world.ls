@@ -1,5 +1,5 @@
 require! {
-  '../config/docker': docker-config
+  '../../config/docker': docker-config
   'dockerode': Dockerode
   'stream-buffers': {WritableStreamBuffer}
 }
