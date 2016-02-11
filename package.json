@@ -14,9 +14,11 @@
   "homepage": "https://github.com/Originate/node-docker-build#readme",
   "devDependencies": {
     "async": "^1.5.2",
+    "camel-case": "^1.2.2",
     "chai": "^3.5.0",
     "cucumber": "^0.9.4",
     "livescript": "^1.4.0",
+    "nitroglycerin": "^1.0.3",
     "scope-eval": "0.0.3",
     "stream-buffers": "^3.0.0",
     "tmp": "0.0.28"

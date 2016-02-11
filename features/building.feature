@@ -4,27 +4,31 @@ Feature: Building docker images
   so that I can build tools that use docker under the hood
 
 
+  Background:
+    Given a new DockerBuild instance called "image"
+
+
   Scenario: building an empty image
-    When I run
-      """
-      image = new DockerBuild from: 'alpine:latest'
-      image.build tag: 'my_image_tag', done
-      """
-    Then a docker image with the tag "my_image_tag:latest" is successfully created
+    When building the image with the tag "my_image_tag"
+    Then it creates a docker image with the tag "my_image_tag:latest"
 
 
   Scenario: running commands on an image
-    When I run on an image
+    When running:
       """
       image.run 'echo -n "bar" > /foo'
       """
-    Then my docker image has a file "/foo" with the content "bar"
+    And building the image
+    Then the generated docker image contains a file "/foo" with the content "bar"
 
 
   Scenario: copying files to an image
-    Given I have a file on my filesystem with contents "buzz"
-    When I run on an image
+    Given a directory "my-dir" with the files:
+      | NAME        | CONTENT     |
+      | message.txt | hello world |
+    When running:
       """
-      image.copy myFilePath, '/fizz'
+      image.copy "#{my-dir-path}/message.txt", '/announcement.txt'
       """
-    Then my docker image has a file "/fizz" with the content "buzz"
+    And building the image
+    Then the generated docker image contains a file "/announcement.txt" with the content "hello world"

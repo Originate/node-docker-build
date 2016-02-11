@@ -4,7 +4,7 @@
 
 
 MACHINE_NAME = 'default'
-DOCKER_HOST = 'tcp://192.168.148.129:2376'
+DOCKER_HOST = 'tcp://xxx.xxx.xxx.xxx:xxxx'
 DOCKER_CERT_PATH = "#{process.env.HOME}/.docker/machine/machines/#{MACHINE_NAME}"
 DOCKER_TLS_VERIFY = 1
 

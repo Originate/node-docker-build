@@ -1,34 +1,31 @@
-Docker = require 'dockerode'
-dockerConfig = require '../config/docker'
-{WritableStreamBuffer} = require 'stream-buffers'
+require! {
+  '../config/docker': docker-config
+  'dockerode': Dockerode
+  'stream-buffers': {WritableStreamBuffer}
+}
 
 
 class World
+
   ->
-    @_docker = new Docker dockerConfig
+    @_docker = new Dockerode dockerConfig
 
 
-  readImageFileContents: ({imageId, filePath}, done) ->
-    stdOutStream = new WritableStreamBuffer
+  read-image-file-contents: ({image-id, file-path}, done) ->
+    stdout-stream = new WritableStreamBuffer
     @_docker.run(
-      imageId
-      [\cat, filePath]
-      [stdOutStream]
+      image-id
+      [\cat, file-path]
+      [stdout-stream]
       Tty: no
       (err) ->
         return done err if err
-        done null, stdOutStream.getContents().toString()
+        done null, stdout-stream.get-contents!to-string!
     )
 
 
-  getDockerImages: (done) ->
-    @_docker.listImages (err, images) ~>
-      return done err if err
-      done null, images
-
-
-  runImage: (imageId, command, done) ->
-    @_docker.run imageId, command, done
+  get-docker-images: (done) ->
+    @_docker.list-images done
 
 
 module.exports = -> @World = World

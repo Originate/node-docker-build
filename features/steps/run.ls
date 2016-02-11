@@ -1,19 +1,22 @@
-DockerBuild = require '../../docker_build'
-docker-config = require '../config/docker'
-livescript = require 'livescript'
-scope-eval = require 'scope-eval'
+require! {
+  '../../docker_build': DockerBuild
+  '../config/docker': docker-config
+  'livescript'
+  'scope-eval'
+}
 
 
 module.exports = ->
-  @When /^I run$/ timeout: 50000, (source, done) ->
-    source
-    |> livescript.compile
-    |> scope-eval _, {DockerBuild, done}
+
+  @Given /^a new DockerBuild instance called "([^"]+)"$/ (@instance-name) ->
+    @run-scope[@instance-name] = new DockerBuild from: 'alpine:latest'
 
 
-  @When /^I run on an image$/ timeout: 50000, (source, done) ->
-    image = new DockerBuild from: 'alpine:latest'
+  @When /^running:$/ timeout: 50000, (source) ->
     source
     |> livescript.compile
-    |> scope-eval _, {image, @myFilePath}
-    image.build tag: 'test_image', done
+    |> scope-eval _, @run-scope
+
+
+  @When /^building the image(?: with the tag "([^"]+)")?$/ (tag-name='test_image', done) ->
+    @run-scope[@instance-name].build tag: tag-name, done

@@ -1,25 +1,20 @@
-async = require 'async'
-{expect} = require 'chai'
+require! {
+  'async'
+  'chai': {expect}
+  'nitroglycerin': N
+}
 
 
 module.exports = ->
 
-  @Given /^I have no docker images$/ (done) ->
-    @getDockerImages (err, images) ~>
-      return done err if err
-      async.each (images.map (.Id)), @removeImage, done
-
-
-  @Then /^a docker image with the tag "([^"]+)" is successfully created$/ (tag, done) ->
-    @getDockerImages (err, images) ->
-      return done err if err
+  @Then /^it creates a docker image with the tag "([^"]+)"$/ (tag, done) ->
+    @get-docker-images N (images) ->
       tags = [].concat ...(images.map (.RepoTags))
       expect(tags).to.contain tag
-      done()
+      done!
 
 
-  @Then /^my docker image has a file "([^"]+)" with the content "([^"]+)"$/ (filePath, expectedContents, done) ->
-    @readImageFileContents {imageId: 'test_image', filePath} (err, contents) ->
-      return done err if err
-      expect(contents).to.equal expectedContents
-      done()
+  @Then /^the generated docker image contains a file "([^"]+)" with the content "([^"]+)"$/ (file-path, expected-contents, done) ->
+    @read-image-file-contents {image-id: 'test_image', file-path} N (contents) ->
+      expect(contents).to.equal expected-contents
+      done!

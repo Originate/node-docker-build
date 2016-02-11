@@ -1,35 +1,38 @@
-Docker = require 'dockerode'
-fs = require 'fs'
-tar = require 'tar-stream'
-uuid = require 'node-uuid'
+require! {
+  'dockerode': Dockerode
+  'fs'
+  'node-uuid': uuid
+  'tar-stream'
+}
 
 
 class DockerBuild
 
   (opts) ->
-    @dockerFileCommands = ["FROM #{opts.from}"]
-    @tarball = tar.pack()
+    @docker-file-commands = ["FROM #{opts.from}"]
+    @tarball = tarStream.pack!
 
 
   build: ({tag}, done) ->
-    @tarball.entry name: 'Dockerfile', @dockerFileCommands.join('\n')
-    @tarball.finalize()
+    @tarball
+      ..entry name: 'Dockerfile', @docker-file-commands.join('\n')
+      ..finalize!
 
-    docker = new Docker
-    docker.buildImage @tarball, t: tag, (err, response) ->
+    new Dockerode!.buildImage @tarball, t: tag, (err, response) ->
       return done err if err
-      response.on 'data' ->
-      response.on 'end' -> done()
+      response
+        ..on 'data' ->
+        ..on 'end' -> done!
 
 
   copy: (srcFilePath, destFilePath) ->
-    tmpFileName = uuid.v4()
+    tmpFileName = uuid.v4!
     @tarball.entry name: tmpFileName, fs.readFileSync(srcFilePath)
-    @dockerFileCommands.push "COPY #{tmpFileName} #{destFilePath}"
+    @docker-file-commands.push "COPY #{tmpFileName} #{destFilePath}"
 
 
   run: (command) ->
-    @dockerFileCommands.push "RUN #{command}"
+    @docker-file-commands.push "RUN #{command}"
 
 
 
