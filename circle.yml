@@ -1,0 +1,8 @@
+machine:
+  services:
+    - docker
+
+
+test:
+  pre:
+    - cp features/config/docker.linux.example.ls features/config/docker.ls
