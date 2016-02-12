@@ -13,3 +13,10 @@ test:
   override:
     - npm run lint-dependencies
     - npm test
+
+
+deployment:
+  branch: release
+  commands:
+    - npm install -g ci-npm-publish
+    - npm-publish

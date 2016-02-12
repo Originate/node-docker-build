@@ -27,6 +27,7 @@
   ],
   "homepage": "https://github.com/Originate/node-docker-build#readme",
   "license": "MIT",
+  "main": "dist/docker_build.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Originate/node-docker-build.git"
