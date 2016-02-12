@@ -19,5 +19,5 @@ deployment:
   publish:
     branch: release
     commands:
-      - npm install -g ci-npm-publish
-      - npm-publish
+      - npm set //registry.npmjs.org/:_authToken $AUTH_TOKEN
+      - npm publish
