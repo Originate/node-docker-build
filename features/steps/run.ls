@@ -1,5 +1,5 @@
 require! {
-  '../../src/docker_build': DockerBuild
+  '../../src/virtual_dockerfile': VirtualDockerfile
   '../../config/docker': docker-config
   'livescript'
   'scope-eval'
@@ -8,8 +8,8 @@ require! {
 
 module.exports = ->
 
-  @Given /^a new DockerBuild instance called "([^"]+)"$/ (@instance-name) ->
-    @run-scope[@instance-name] = new DockerBuild {from: 'alpine:latest', docker-config}
+  @Given /^a new VirtualDockerfile instance called "([^"]+)"$/ (@instance-name) ->
+    @run-scope[@instance-name] = new VirtualDockerfile {from: 'alpine:latest', docker-config}
 
 
   @When /^running:$/ timeout: 50000, (source) ->

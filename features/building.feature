@@ -5,7 +5,7 @@ Feature: Building docker images
 
 
   Background:
-    Given a new DockerBuild instance called "image"
+    Given a new VirtualDockerfile instance called "image"
 
 
   Scenario: building an empty image

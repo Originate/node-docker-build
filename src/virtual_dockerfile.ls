@@ -6,7 +6,7 @@ require! {
 }
 
 
-class DockerBuild
+class VirtualDockerfile
 
   ({from, @docker-config}) ->
     @docker-file-commands = ["FROM #{from}"]
@@ -36,4 +36,4 @@ class DockerBuild
 
 
 
-module.exports = DockerBuild
+module.exports = VirtualDockerfile
