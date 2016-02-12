@@ -1,5 +1,5 @@
 {
-  "name": "node-docker-build",
+  "name": "virtual-dockerfile",
   "version": "0.0.1",
   "description": "Node api to build docker images programmatically",
   "author": "Originate",
