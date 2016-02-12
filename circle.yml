@@ -16,7 +16,8 @@ test:
 
 
 deployment:
-  branch: release
-  commands:
-    - npm install -g ci-npm-publish
-    - npm-publish
+  publish:
+    branch: release
+    commands:
+      - npm install -g ci-npm-publish
+      - npm-publish
