@@ -1,5 +1,5 @@
 require! {
-  '../../src/virtual_dockerfile': VirtualDockerfile
+  '../..': VirtualDockerfile
   '../../config/docker': docker-config
   'livescript'
   'scope-eval'
