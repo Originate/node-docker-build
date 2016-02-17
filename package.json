@@ -33,8 +33,10 @@
     "url": "git+https://github.com/Originate/node-docker-build.git"
   },
   "scripts": {
+    "build": "lsc --compile --output dist src",
     "lint-dependencies": "dependency-lint",
-    "prepublish": "bin/build",
+    "prepublish": "npm run build",
+    "pretest": "npm run build",
     "test": "cucumber-js --compiler ls:livescript"
   }
 }
