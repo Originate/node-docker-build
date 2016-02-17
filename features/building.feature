@@ -32,3 +32,11 @@ Feature: Building docker images
       """
     And building the image
     Then the generated docker image contains a file "/announcement.txt" with the content "hello world"
+
+
+  Scenario: running failing commands on an image
+    When running:
+      """
+      image.run 'exit 1'
+      """
+    Then building the image returns an error
