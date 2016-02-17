@@ -18,10 +18,10 @@ class VirtualDockerfile
       ..entry name: 'Dockerfile', @docker-file-commands.join('\n')
       ..finalize!
 
-    @docker = new Dockerode(@docker-config)
-      ..buildImage @tarball, t: tag, (err, response) ~>
+    @docker = new Dockerode @docker-config
+      ..build-image @tarball, t: tag, (err, response) ~>
         return done err if err
-        @docker.modem.followProgress response, (err) ->
+        @docker.modem.follow-progress response, (err) ->
           return done Error(err) if err?
           done!
 
