@@ -1,7 +1,7 @@
 require! {
   'dockerode': Dockerode
   'fs'
-  'node-uuid': uuid
+  'uuid': uuid
   'tar-stream'
 }
 
